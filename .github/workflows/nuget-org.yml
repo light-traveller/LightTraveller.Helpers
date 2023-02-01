@@ -1,0 +1,42 @@
+name: Nuget.org Release
+
+on:
+  push:
+    branches: 'master'
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:  
+  publish-nuget:
+
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Debug version tag
+      run: echo ${GITHUB_REF/refs\/tags\/v/}
+
+    - name: SemVer
+      run: echo "semver=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build -c Release --no-restore /p:Version=${{ env.semver }}
+
+    - name: Unit test
+      run: dotnet test -c Release --no-build --no-restore --verbosity normal
+
+    - name: Pack nuget
+      run: dotnet pack -c Release --no-build --no-restore --output nupkgs /p:PackageVersion=${{ env.semver }}
+    
+    - name: Upload to nuget.org
+      run: dotnet nuget push nupkgs/*.nupkg --api-key ${{secrets.NUGET_ORG}} --source https://api.nuget.org/v3/index.json
