@@ -4,13 +4,15 @@ namespace LightTraveller.Helpers;
 
 public static class EncodingHelpers
 {
-    private const string INVALID_BASE32_ERROR = "The input string is not a valid Base32 encoded string.";
+    private const string INVALID_BASE32_ERROR = "The input string is not a valid base-32 encoded string.";
 
     /// <summary>
-    /// 
+    /// Encodes a <see cref="byte[]"/> to its equivalent string representation that is encoded using base-32 encoding algorithm.
     /// </summary>
-    /// <param name="bytes"></param>
-    /// <returns></returns>
+    /// <param name="bytes">An array of 8-bit unsigned integers.</param>
+    /// <returns>The string representation of the <see cref="byte[]"/> in base-32.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="bytes"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="bytes"/> is an empty array.</exception>
     public static string ToBase32String(this byte[] bytes)
     {
         _ = Guard.NullOrEmpty(bytes);
@@ -302,13 +304,15 @@ public static class EncodingHelpers
     //}
 
     /// <summary>
-    /// 
+    /// Decodes the specified string, which encodes binary data as base-32 digits, to an equivalent 8-bit unsigned integer array.
     /// </summary>
-    /// <param name="input"></param>
-    /// <param name="ignoreCase"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="InvalidOperationException"></exception>
+    /// <param name="input">The string to decode.</param>
+    /// <param name="ignoreCase">
+    /// <para>If <see cref="true"/>, the string characters will be converted to upper-case before encoding; otherwise, </para>
+    /// <para>lower-case characters in the input string will cause an <see cref="ArgumentException"/> to be thrown.</para></param>
+    /// <returns>An array of 8-bit unsigned integers that is equivalent to the input string.</returns>
+    /// <exception cref="ArgumentException">The <paramref name="input"/> is not a valid base-32 string.</exception>
+    /// <exception cref="InvalidOperationException">The <paramref name="input"/> is not a valid base-32 string.</exception>
     /// <remarks>
     /// <para>Based on the excellent work of Oleg Ignat (https://olegignat.com/base32/).</para>
     /// <para>Simplicity of this method makes it faster than masking & shifting bits.</para>
@@ -342,7 +346,7 @@ public static class EncodingHelpers
 
             if (code < 0)
             {
-                throw new InvalidOperationException($"The provided string is not a valid Base32 string. Invalid character code: {(int)data[inputRow]}.");
+                throw new InvalidOperationException($"{INVALID_BASE32_ERROR}. Invalid character code: {(int)data[inputRow]}.");
             }
 
             // Calculate the number of bits we can extract from current input character to fill missing bits in the output byte.
@@ -375,11 +379,36 @@ public static class EncodingHelpers
     }
 
     /// <summary>
-    /// 
+    /// Determine whether a string is a valid base-32 encoded string or not.
     /// </summary>
-    /// <param name="input"></param>
-    /// <param name="ignoreCase"></param>
-    /// <returns></returns>
+    /// <param name="input">The string to be validated.</param>
+    /// <param name="ignoreCase">If <see cref="true"/>, the string characters will be converted to upper-case before validation; otherwise, lower-case characters in the input string will be considered invalid.</param>
+    /// <returns><see cref="true"/> if the string is valid; otherwise, <see cref="false"/>.</returns>
+    /// <remarks>
+    /// <list type="number">
+    ///     <listheader>    
+    ///         <description>The following conditions make a string invalid</description>
+    ///     </listheader>
+    ///     <item>
+    ///         <description>A string of length zero (an empty string)</description>
+    ///     </item>
+    ///     <item>
+    ///         <description>A string with a length that is not a multiply of 8</description>
+    ///     </item>
+    ///     <item>
+    ///         <description>A padding character appearing in either of the two first positions in the string</description>
+    ///     </item>
+    ///     <item>
+    ///         <description>A character other than capital letters A to Z and numbers 2, 3, 4, 5, 6 and 7. However, if the <paramref name="ignoreCase"/> argument is <see cref="true"/>, lower-case characters will be accepted.</description>
+    ///     </item>
+    ///     <item>
+    ///         <description>A non-padding character appearing after a padding character.</description>
+    ///     </item>
+    ///     <item>
+    ///         <description>Number of padding characters other than 1, 3, 4 or 6</description>
+    ///     </item>
+    /// </list>
+    /// </remarks>
     public static bool ValidateBase32String(this string input, bool ignoreCase = true)
     {
         if (input.Empty())

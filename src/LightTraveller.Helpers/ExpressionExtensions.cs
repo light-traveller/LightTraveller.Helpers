@@ -5,28 +5,42 @@ namespace LightTraveller.Helpers;
 
 public static class ExpressionExtensions
 {
-    public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> @this, Expression<Func<T, bool>> other)
+    /// <summary>
+    /// Combines two separate expressions of type <see cref="Expression{Func{T, bool}}"/> using logical AND operator.
+    /// </summary>
+    /// <typeparam name="T">Type of the arguments of the expression.</typeparam>
+    /// <param name="first">The first expression.</param>
+    /// <param name="second">The second expression.</param>
+    /// <returns>An <see cref="Expression{Func{T, bool}}"/> that is an AND-combination of two expressions passed to the method.</returns>
+    public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
     {
         var parameter = Expression.Parameter(typeof(T));
 
-        var leftVisitor = new ReplaceExpressionVisitor(@this.Parameters[0], parameter);
-        var left = leftVisitor.Visit(@this.Body);
+        var leftVisitor = new ReplaceExpressionVisitor(first.Parameters[0], parameter);
+        var left = leftVisitor.Visit(first.Body);
 
-        var rightVisitor = new ReplaceExpressionVisitor(other.Parameters[0], parameter);
-        var right = rightVisitor.Visit(other.Body);
+        var rightVisitor = new ReplaceExpressionVisitor(second.Parameters[0], parameter);
+        var right = rightVisitor.Visit(second.Body);
 
         return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(left, right), parameter);
     }
 
-    public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> @this, Expression<Func<T, bool>> other)
+    /// <summary>
+    /// Combines two separate expressions of type <see cref="Expression{Func{T, bool}}"/> using logical OR operator.
+    /// </summary>
+    /// <typeparam name="T">Type of the arguments of the expression.</typeparam>
+    /// <param name="first">The first expression.</param>
+    /// <param name="second">The second expression.</param>
+    /// <returns>An <see cref="Expression{Func{T, bool}}"/> that is an OR-combination of two expressions passed to the method.</returns>
+    public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
     {
         var parameter = Expression.Parameter(typeof(T));
 
-        var leftVisitor = new ReplaceExpressionVisitor(@this.Parameters[0], parameter);
-        var left = leftVisitor.Visit(@this.Body);
+        var leftVisitor = new ReplaceExpressionVisitor(first.Parameters[0], parameter);
+        var left = leftVisitor.Visit(first.Body);
 
-        var rightVisitor = new ReplaceExpressionVisitor(other.Parameters[0], parameter);
-        var right = rightVisitor.Visit(other.Body);
+        var rightVisitor = new ReplaceExpressionVisitor(second.Parameters[0], parameter);
+        var right = rightVisitor.Visit(second.Body);
 
         return Expression.Lambda<Func<T, bool>>(Expression.OrElse(left, right), parameter);
     }
