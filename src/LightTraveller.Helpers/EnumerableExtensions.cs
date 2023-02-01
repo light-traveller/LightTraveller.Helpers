@@ -1,4 +1,6 @@
-﻿namespace LightTraveller.Helpers;
+﻿using LightTraveller.Guards;
+
+namespace LightTraveller.Helpers;
 
 public static class EnumerableExtensions
 {
@@ -6,6 +8,8 @@ public static class EnumerableExtensions
 
     public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)
     {
+        _ = Guard.Null(action);
+
         if (collection is List<T> list)
         {
             list.ForEach(action);
