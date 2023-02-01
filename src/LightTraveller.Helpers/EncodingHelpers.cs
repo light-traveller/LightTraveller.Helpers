@@ -2,7 +2,7 @@
 
 namespace LightTraveller.Helpers;
 
-public static class Encoding
+public static class EncodingHelpers
 {
     private const string INVALID_BASE32_ERROR = "The input string is not a valid Base32 encoded string.";
 

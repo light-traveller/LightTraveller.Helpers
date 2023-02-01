@@ -71,6 +71,6 @@ public class EncodingTests
     [InlineData("I=======")] // Invalid number of paddings. Acceptable numbers: { 0, 1, 3, 4, 6 }
     public void WithInvalidInput_ValidateBase32String_Should_ReturnFalse(string input)
     {
-        Assert.False(Encoding.ValidateBase32String(input));
+        Assert.False(EncodingHelpers.ValidateBase32String(input));
     }
 }
