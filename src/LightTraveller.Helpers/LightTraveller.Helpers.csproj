@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
@@ -9,11 +9,11 @@
         <NeutralLanguage>en</NeutralLanguage>
         <Nullable>enable</Nullable>
         <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/light-traveller/LightTraveller.Guards</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/light-traveller/LightTraveller.Helpers</PackageProjectUrl>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <PackageTags>helper;dotnet;dotnet-core;csharp-helper;helper-library;utility-helpers;</PackageTags>
         <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://github.com/light-traveller/LightTraveller.Guards</RepositoryUrl>
+        <RepositoryUrl>https://github.com/light-traveller/LightTraveller.Helpers</RepositoryUrl>
         <Title>LightTraveller.Helpers</Title>
         <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     </PropertyGroup>
