@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightTraveller.Helpers", "src\LightTraveller.Helpers\LightTraveller.Helpers.csproj", "{A3C3240E-D345-4AA0-B06E-7747BD2976A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightTraveller.Helpers.UnitTests", "src\LightTraveller.Helpers.UnitTests\LightTraveller.Helpers.UnitTests.csproj", "{7EF12959-CFC9-4FA0-8B60-B135C615B7A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3C3240E-D345-4AA0-B06E-7747BD2976A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C3240E-D345-4AA0-B06E-7747BD2976A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C3240E-D345-4AA0-B06E-7747BD2976A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C3240E-D345-4AA0-B06E-7747BD2976A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EF12959-CFC9-4FA0-8B60-B135C615B7A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EF12959-CFC9-4FA0-8B60-B135C615B7A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EF12959-CFC9-4FA0-8B60-B135C615B7A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EF12959-CFC9-4FA0-8B60-B135C615B7A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39654BDD-1A65-4426-8729-9F56F47053C4}
+	EndGlobalSection
+EndGlobal
