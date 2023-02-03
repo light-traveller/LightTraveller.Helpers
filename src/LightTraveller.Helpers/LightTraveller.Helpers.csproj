@@ -5,6 +5,7 @@
         <Authors>light-traveller</Authors>
         <Description>Helpers for common coding tasks in .NET</Description>
         <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
         <ImplicitUsings>enable</ImplicitUsings>
         <NeutralLanguage>en</NeutralLanguage>
         <Nullable>enable</Nullable>
