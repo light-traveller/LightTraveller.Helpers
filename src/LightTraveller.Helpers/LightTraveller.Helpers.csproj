@@ -20,7 +20,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="LightTraveller.Guards" Version="1.1.1" />
+        <PackageReference Include="LightTraveller.Guards" Version="1.1.4" />
     </ItemGroup>
 
 </Project>
