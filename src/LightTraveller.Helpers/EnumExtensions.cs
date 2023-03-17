@@ -14,4 +14,9 @@ public static class EnumExtensions
     {
         return e.GetAttribute<DisplayAttribute>()?.Name;
     }
+
+    public static string? GetDescription(this Enum e)
+    {
+        return e.GetAttribute<DisplayAttribute>()?.Description;
+    }
 }
